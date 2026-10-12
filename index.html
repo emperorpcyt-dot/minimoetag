@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Anime File Gate</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://libtl.com/sdk.js"
+          data-zone="10396377"
+          data-sdk="show_10396377"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      background:
+        linear-gradient(180deg, rgba(5,8,25,.25),
+        rgba(5,8,25,.88)),
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85")
+        center/cover fixed;
+      background-color: #080b20;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 390px;
+      padding: 30px 22px;
+      text-align: center;
+      border: 1px solid rgba(119,117,255,.8);
+      border-radius: 24px;
+      background: rgba(8,13,39,.82);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 35px rgba(92,65,255,.28);
+    }
+
+    .logo {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #7774ff;
+      border-radius: 50%;
+      font-size: 43px;
+      box-shadow: 0 0 22px #6548ff;
+    }
+
+    h1 { font-size: 30px; margin: 10px 0; }
+    h1 span { color: #b16cff; }
+
+    p {
+      color: #c7cbe2;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px 12px;
+      margin-top: 14px;
+      border-radius: 15px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+    }
+
+    #watch {
+      border: 1px solid #8b7bff;
+      background: linear-gradient(100deg,#168dff,#763cff,#cf36e9);
+      box-shadow: 0 5px 25px rgba(102,60,255,.35);
+    }
+
+    #verify {
+      border: 1px solid #46517e;
+      background: rgba(28,37,70,.8);
+    }
+
+    #status {
+      margin-top: 24px;
+      color: #80baff;
+    }
+
+    .small {
+      font-size: 11px;
+      color: #a4a9c5;
+      letter-spacing: 2px;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="logo">📂</div>
+
+    <h1>Get Your <span>File</span></h1>
+    <p>Watch the advertisement, then verify to continue.</p>
+
+    <button id="watch">▶ &nbsp; Watch Ad</button>
+    <button id="verify">✓ &nbsp; Verify</button>
+
+    <p id="status">● Ready</p>
+    <div class="small">ANIME • FILES • COMMUNITY</div>
+  </main>
+
+  <script>
+    const statusText = document.getElementById("status");
+    const watchButton = document.getElementById("watch");
+
+    watchButton.addEventListener("click", async () => {
+      if (typeof window.show_10396377 !== "function") {
+        statusText.textContent = "Ad unavailable. Please try again.";
+        return;
+      }
+
+      try {
+        statusText.textContent = "Opening advertisement...";
+
+        await window.show_10396377({
+          type: "inApp",
+          inAppSettings: {
+            frequency: 2,
+            capping: 0.1,
+            interval: 30,
+            timeout: 5,
+            everyPage: false
+          }
+        });
+
+        statusText.textContent =
+          "Ad flow ended. Verification is not connected yet.";
+      } catch (error) {
+        statusText.textContent = "Ad failed to open. Try again.";
+      }
+    });
+
+    document.getElementById("verify").addEventListener("click", () => {
+      statusText.textContent =
+        "File verification is not connected yet.";
+    });
+  </script>
+</body>
+</html>
 
